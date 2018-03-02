@@ -50,17 +50,10 @@ function helpers() {
         if (this.kb.l) this.camera.acc.add(new Vector(-2, 0));
         if (this.kb.r) this.camera.acc.add(new Vector(2, 0));
         this.camera.update();
+        this.drawAtStart();
         this.draw();
         this.ctx.drawImage(this.ground, -this.camera.pos.x, -this.camera.pos.y);
-        var mouseRel = Math.round(this.mXg / 100) + ", " + Math.round(this.mYg / 100);
-        this.ctx.font = "24px Arial";
-        this.ctx.fillStyle = "rgba(0,0,0,1)";
-        this.ctx.strokeStyle = "rgba(255,255,255,1)";
-        this.ctx.lineWidth = 3;
-        //this.ctx.strokeText(mouseRel, 30, this.height-24);
-        //this.ctx.fillText(mouseRel, 30, this.height-24);
         this.drawAtEnd();
-        //this.gtx.fillRect((this.mXg-10) , (this.mYg-10) ,20,20);
         this.gtx.restore();
         window.requestAnimationFrame(this.render.bind(this));
     };
@@ -165,9 +158,9 @@ function helpers() {
         };
     };
     window.addEventListener("resize", this.resize = function() {
-        scr.width = window.innerWidth - 400;
+        scr.width = window.innerWidth;
         scr.height = window.innerHeight;
-        scr.style.width = window.innerWidth - 400 + "px";
+        scr.style.width = window.innerWidth + "px";
         scr.style.height = window.innerHeight + "px";
         this.width = scr.width;
         this.height = scr.height;
