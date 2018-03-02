@@ -57,8 +57,8 @@ function helpers() {
         this.ctx.fillStyle = "rgba(0,0,0,1)";
         this.ctx.strokeStyle = "rgba(255,255,255,1)";
         this.ctx.lineWidth = 3;
-        this.ctx.strokeText(mouseRel, 30, this.height-24);
-        this.ctx.fillText(mouseRel, 30, this.height-24);
+        //this.ctx.strokeText(mouseRel, 30, this.height-24);
+        //this.ctx.fillText(mouseRel, 30, this.height-24);
         this.drawAtEnd();
         //this.gtx.fillRect((this.mXg-10) , (this.mYg-10) ,20,20);
         this.gtx.restore();
@@ -165,9 +165,9 @@ function helpers() {
         };
     };
     window.addEventListener("resize", this.resize = function() {
-        scr.width = window.innerWidth;
+        scr.width = window.innerWidth - 400;
         scr.height = window.innerHeight;
-        scr.style.width = window.innerWidth + "px";
+        scr.style.width = window.innerWidth - 400 + "px";
         scr.style.height = window.innerHeight + "px";
         this.width = scr.width;
         this.height = scr.height;
@@ -181,15 +181,15 @@ function helpers() {
     };
     window.addEventListener("wheel", function (e) {
         if (this.kb.s) {
-            this.camera.acc.add(new Vector(e.deltaX*0.3, e.deltaY*0.3));
+            this.camera.acc.add(new Vector(e.deltaX*this.camera.zoom/20, e.deltaY*this.camera.zoom/20));
         } else {
-            this.camera.zoom += e.deltaY * 0.01;
+            this.camera.zoom += e.deltaY * 0.001;
             if(this.camera.zoom > 1) this.camera.zoom = 1;
-            if(this.camera.zoom < 0.3) this.camera.zoom = 0.3;
+            if(this.camera.zoom < 0.2) this.camera.zoom = 0.2;
             this.ground.width = this.map.width * this.camera.zoom;
             this.ground.height = this.map.height * this.camera.zoom;
+            //this.camera.pos = new Vector(this.mXg, this.mYg);
             this.isGroundDirty = 1;
-
         }
         event.preventDefault();
     }.bind(this));
